@@ -1,6 +1,12 @@
+from colorama import Fore, Back, Style
+import colorama
+colorama.init()
+import enchant
 
-l = ['a', 'b', 'c']
-mask = "c*"
+dct = enchant.Dict("en_US")
+
+l = ['a', 's', 's']
+mask = "c"
 
 mask = input("Type mask: ")
 def gen(s, c = 0):
@@ -38,15 +44,22 @@ for i in ttt:
 
 for i in rz:
 	k = True
-	if len(i) == len(mask):
+	# print(Fore.RED, mask[len(mask)-1])
+	if len(i) == len(mask) or (len(i) > len(mask)-1 and len(mask)>0 and mask[len(mask)-1]=='+'):
 		for j in range(0,len(mask)):
 			if mask[j] != '*':
-				if mask[j] != i[j]:
+				if mask[j] != i[j] and mask[j] != '+':
 					k = False
 		if k:
-			print(i)
+			if dct.check(i):
+				print(Fore.YELLOW, i)
+			else:
+				print(Fore.BLUE, i)
 	elif len(mask) == 0:
-		print(i)
+		if dct.check(i):
+			print(Fore.YELLOW, i)
+		else:
+			print(Fore.BLUE, i)
 
-
+print(Style.RESET_ALL)
 # print(rz)
