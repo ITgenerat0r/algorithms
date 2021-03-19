@@ -1,12 +1,18 @@
-# from colorama import Fore, Back, Style
-# import colorama
-# colorama.init()
+from colorama import Fore, Back, Style
+import colorama
+colorama.init()
 
 # dct = enchant.Dict("en_US")
 
 l = ['a', 's', 's']
 mask = "c"
 
+s = input("Type list symbols: ")
+if len(s) > 0:
+	l = []
+for i in s:
+	l.append(i)
+# print(l)
 mask = input("Type mask: ")
 def gen(s, c = 0):
 	# print(c)
@@ -50,9 +56,9 @@ for i in rz:
 				if mask[j] != i[j] and mask[j] != '+':
 					k = False
 		if k:
-			print(i)
+			print(Fore.YELLOW, i)
 	elif len(mask) == 0:
-		print(i)
+		print(Fore.YELLOW, i)
 
 
 # print(rz)
