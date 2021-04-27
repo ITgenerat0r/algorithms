@@ -3,9 +3,12 @@ import colorama
 colorama.init()
 import enchant
 
-dct = enchant.Dict("en_US")
+dct = enchant.Dict("ru_RU")
+# set ru-RU
+# form «…\LibreOffice\share\extensions\dict-ru»
+# to C:\...\Python\Python36\site-packages\enchant\data\mingw64\share\enchant\hunspell
 
-l = ['a', 's', 's']
+l = ['р', 'а', 'б']
 mask = "c"
 
 mask = input("Type mask: ")
