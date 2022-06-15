@@ -14,6 +14,7 @@ for i in s:
 	l.append(i)
 # print(l)
 mask = input("Type mask: ")
+
 def gen(s, c = 0):
 	# print(c)
 	# print(s)

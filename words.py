@@ -4,14 +4,21 @@ colorama.init()
 import enchant
 
 dct = enchant.Dict("ru_RU")
+# dct = enchant.Dict("en_EN")
 # set ru-RU
 # form «…\LibreOffice\share\extensions\dict-ru»
 # to C:\...\Python\Python36\site-packages\enchant\data\mingw64\share\enchant\hunspell
 
-l = ['р', 'а', 'б']
+l = ['t', 'e', 's', 't']
 mask = "c"
+l = []
+dt = input("  Alphabet: ")
+for i in dt:
+	l.append(i)
 
-mask = input("Type mask: ")
+
+mask = input(" Type mask: ")
+
 def gen(s, c = 0):
 	# print(c)
 	# print(s)
@@ -37,13 +44,20 @@ def gen(s, c = 0):
 	return res
 
 
-
+print("Stage 1")
 ttt = gen(l)
 print()
+
+print("Stage 2")
 rz = list()
 for i in ttt:
 	if not i in rz:
 		rz.append(i)
+
+print()
+print("Stage 3")
+
+f = open("words.log", 'w')
 
 for i in rz:
 	k = True
@@ -56,13 +70,25 @@ for i in rz:
 		if k:
 			if dct.check(i):
 				print(Fore.YELLOW, i)
+				f.write(i + '\n')
 			else:
 				print(Fore.BLUE, i)
 	elif len(mask) == 0:
 		if dct.check(i):
 			print(Fore.YELLOW, i)
+			f.write(i + '\n')
 		else:
 			print(Fore.BLUE, i)
 
+f.close()
+
+print()
+print(Fore.YELLOW, "Output: ")
+f = open("words.log", 'r')
+s = f.read()
+while s:
+	print(s)
+	s = f.read()
+f.close()
 print(Style.RESET_ALL)
 # print(rz)
