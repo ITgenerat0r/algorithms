@@ -3,8 +3,8 @@ import colorama
 colorama.init()
 import enchant
 
-dct = enchant.Dict("ru_RU")
-# dct = enchant.Dict("en_EN")
+# dct = enchant.Dict("ru_RU")
+dct = enchant.Dict("en_EN")
 # set ru-RU
 # form «…\LibreOffice\share\extensions\dict-ru»
 # to C:\...\Python\Python36\site-packages\enchant\data\mingw64\share\enchant\hunspell
