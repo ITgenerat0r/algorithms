@@ -7,8 +7,8 @@ import itertools
 # dct = enchant.Dict("ru_RU")
 # dct = enchant.Dict("en_EN")
 # pwl = enchant.request_pwl_dict('dict/en_US')
-# dct = enchant.DictWithPWL('ru_RU', 'dict/ru_RU')
-dct = enchant.DictWithPWL('en_EN', 'dict/en_EN')
+dct = enchant.DictWithPWL('ru_RU', 'dict/ru_RU')
+# dct = enchant.DictWithPWL('en_EN', 'dict/en_EN')
 # set ru-RU
 # form «…\LibreOffice\share\extensions\dict-ru»
 # to C:\...\Python\Python36\site-packages\enchant\data\mingw64\share\enchant\hunspell
@@ -50,13 +50,13 @@ def factorial(v):
 
 print("Stage 1")
 len_alphabet = len(l)
+print("Alphabet size: ", len_alphabet, "characters")
 
 count_generate = factorial(len_alphabet)
 
 print("Generating", count_generate, "...")
 ttt = gen(l)
 
-print(ttt)
 print()
 print("Stage 2")
 
