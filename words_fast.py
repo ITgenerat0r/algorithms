@@ -4,6 +4,7 @@ colorama.init()
 import enchant
 import itertools
 
+
 # dct = enchant.Dict("ru_RU")
 # dct = enchant.Dict("en_EN")
 # pwl = enchant.request_pwl_dict('dict/en_US')
@@ -75,6 +76,12 @@ def factorial(v):
 	else:
 		return v * factorial(v-1)
 
+def print_before_percent(text="", clear_len = 50, step_back = 1):
+	clear_str = "     "
+	while len(clear_str) < clear_len:
+		clear_str += "     "
+	print("\033["+str(int(step_back))+"A", text, clear_str)
+
 print("Stage 1")
 len_alphabet = len(l)
 print("Alphabet size: ", Fore.RED, len_alphabet, Style.RESET_ALL, "characters")
@@ -97,6 +104,7 @@ len_scrl = len(scrl)
 count = 0
 last_i = ""
 last_percent = 0
+is_continue = False
 for ii in ttt:
 	count += 1
 	percent = 100*count/count_generate
@@ -106,6 +114,9 @@ for ii in ttt:
 	else:
 		pc_end = pc_begin
 	if last_percent != percent and len_alphabet > 6:
+		if is_continue:
+			print("\033[2A")
+			is_continue = False
 		print(Style.RESET_ALL, str(percent)[:7]+"%", "["+scrl[-int(len_scrl/2)-pc_begin:-int(pc_end)]+"]  ")
 		last_percent = percent
 	i = ""
@@ -122,6 +133,7 @@ for ii in ttt:
 				i += mask[it_m]
 		# print("debug ",i)
 		if i == last_i:
+			is_continue = True
 			continue
 		else:
 			last_i = i
@@ -130,8 +142,11 @@ for ii in ttt:
 		for it in ii:
 			i += it
 
-	print("\033[1A")
+	# is_continue = False
 	k = True
+	if not is_continue:
+		print("\033[2A")
+	step = 1
 	if len(i) == len_mask or (len(i) > len_mask-1 and len_mask>0 and mask[len_mask-1]=='+'):
 		for j in range(0,len_mask):
 			if mask[j] != '*':
@@ -139,16 +154,20 @@ for ii in ttt:
 					k = False
 		if k:
 			if dct.check(i):
-				print(Fore.YELLOW, i)
+				print(Fore.YELLOW)
+				print_before_percent(i, len_scrl, step)
 				f.write(i + '\n')
 			else:
-				print(Fore.BLUE, i)
+				print(Fore.BLUE)
+				print_before_percent(i, len_scrl, step)
 	elif len_mask == 0:
 		if dct.check(i):
-			print(Fore.YELLOW, i)
+			print(Fore.YELLOW)
+			print_before_percent(i, len_scrl, step)
 			f.write(i + '\n')
 		else:
-			print(Fore.BLUE, i)
+			print(Fore.BLUE)
+			print_before_percent(i, len_scrl, step)
 
 f.close()
 
