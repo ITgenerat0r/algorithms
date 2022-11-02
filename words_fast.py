@@ -91,15 +91,22 @@ print()
 print("Stage 2")
 
 f = open("words.log", 'w')
+scrl = "00000000000000000000000000000000000000000000000000"
+scrl += "__________________________________________________"
+len_scrl = len(scrl)
 count = 0
 last_i = ""
 last_percent = 0
 for ii in ttt:
 	count += 1
 	percent = 100*count/count_generate
-	percent -= percent % 0.0001
+	pc_begin = int(percent / 2)
+	if(pc_begin == 0):
+		pc_end = -len_scrl
+	else:
+		pc_end = pc_begin
 	if last_percent != percent and len_alphabet > 6:
-		print(Style.RESET_ALL, percent)
+		print(Style.RESET_ALL, str(percent)[:7]+"%", "["+scrl[-int(len_scrl/2)-pc_begin:-int(pc_end)]+"]  ")
 		last_percent = percent
 	i = ""
 	if len_mask > 0:
@@ -123,11 +130,10 @@ for ii in ttt:
 		for it in ii:
 			i += it
 
-
+	print("\033[1A")
 	k = True
-	# print(Fore.RED, mask[mask_len-1])
 	if len(i) == len_mask or (len(i) > len_mask-1 and len_mask>0 and mask[len_mask-1]=='+'):
-		for j in range(0,len(mask)):
+		for j in range(0,len_mask):
 			if mask[j] != '*':
 				if mask[j] != i[j] and mask[j] != '+':
 					k = False
@@ -147,6 +153,8 @@ for ii in ttt:
 f.close()
 
 print()
+print(Fore.YELLOW, "Alphabet: ", dt)
+print(" Mask: ", mask)
 print(Fore.YELLOW, "Output: ")
 f = open("words.log", 'r')
 s = f.read()
