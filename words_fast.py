@@ -76,11 +76,16 @@ def factorial(v):
 	else:
 		return v * factorial(v-1)
 
-def print_before_percent(text="", clear_len = 50, step_back = 1):
+percent_is_printed = False
+def print_before_percent(text="", clear_len = 50, step_back = 1, percent_is_printed=True):
 	clear_str = "     "
 	while len(clear_str) < clear_len:
 		clear_str += "     "
-	print("\033["+str(int(step_back))+"A", text, clear_str)
+	if percent_is_printed:
+		print("\033["+str(int(step_back))+"A", text, clear_str)
+	else:
+		print(text)
+	percent_is_printed = False
 
 print("Stage 1")
 len_alphabet = len(l)
@@ -118,6 +123,7 @@ for ii in ttt:
 			print("\033[2A")
 			is_continue = False
 		print(Style.RESET_ALL, str(percent)[:7]+"%", "["+scrl[-int(len_scrl/2)-pc_begin:-int(pc_end)]+"]  ")
+		percent_is_printed = True
 		last_percent = percent
 	i = ""
 	if len_mask > 0:
@@ -155,19 +161,19 @@ for ii in ttt:
 		if k:
 			if dct.check(i):
 				print(Fore.YELLOW)
-				print_before_percent(i, len_scrl, step)
+				print_before_percent(i, len_scrl, step, percent_is_printed)
 				f.write(i + '\n')
 			else:
 				print(Fore.BLUE)
-				print_before_percent(i, len_scrl, step)
+				print_before_percent(i, len_scrl, step, percent_is_printed)
 	elif len_mask == 0:
 		if dct.check(i):
 			print(Fore.YELLOW)
-			print_before_percent(i, len_scrl, step)
+			print_before_percent(i, len_scrl, step, percent_is_printed)
 			f.write(i + '\n')
 		else:
 			print(Fore.BLUE)
-			print_before_percent(i, len_scrl, step)
+			print_before_percent(i, len_scrl, step, percent_is_printed)
 
 f.close()
 
