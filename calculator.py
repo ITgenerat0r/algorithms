@@ -28,6 +28,6 @@ if len(argv) > 1:
 		f = open(resfname , "r")
 		result = f.read().split()[0]
 		f.close()
-		os.remove(resfname)
 		print(result)
+		os.remove(resfname)
 
