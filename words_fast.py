@@ -166,6 +166,7 @@ for ii in ttt:
 			else:
 				print(Fore.BLUE)
 				print_before_percent(i, len_scrl, step, percent_is_printed)
+				# f.write(i + '\n')
 	elif len_mask == 0:
 		if dct.check(i):
 			print(Fore.YELLOW)
@@ -174,6 +175,7 @@ for ii in ttt:
 		else:
 			print(Fore.BLUE)
 			print_before_percent(i, len_scrl, step, percent_is_printed)
+			# f.write(i + '\n')
 
 f.close()
 
