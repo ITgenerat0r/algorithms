@@ -47,4 +47,8 @@ if ru and en:
 
 
 for i in data:
+	if(dct.check(i)):
+		print(Fore.YELLOW)
+	else:
+		print(Fore.BLUE)
 	print(i)
