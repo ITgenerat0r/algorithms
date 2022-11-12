@@ -45,10 +45,22 @@ if ru and en:
 	else:
 		cdt = dct_en
 
+res = []
 
 for i in data:
 	if(dct.check(i)):
+		res.append(i)
 		print(Fore.YELLOW)
 	else:
 		print(Fore.BLUE)
 	print(i)
+
+
+print()
+print(Fore.YELLOW)
+print(" Output:")
+for i in res:
+	print(i)
+
+
+

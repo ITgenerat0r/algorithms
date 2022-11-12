@@ -3,7 +3,8 @@
 #include <fstream>
 #include <string>
 #include <chrono>
-#include <ctime> 
+#include <windows.h>
+#include <locale>
 
 std::string output_file_name = "words";
 
@@ -26,8 +27,19 @@ void chain(std::string bit, const auto& it, const auto& end, std::ofstream& out)
 }
 
 
+void gotoxy(int x, int y)
+{
+    COORD position;
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    position.X = x;
+    position.Y = y;
+    SetConsoleCursorPosition(hConsole, position);
+}
+
+
 int main(int argc, char const *argv[])
 {
+	setlocale(LC_ALL, "Russian");
 	auto start = std::chrono::system_clock::now();
 	bool rewrite_file = true;
 	std::vector<std::vector<char>> data;
@@ -37,12 +49,12 @@ int main(int argc, char const *argv[])
 
 	for(int i = 1; i < argc; i++){
 		std::string st = argv[i];
-		// std::cout << st << std::endl;
+		std::cout << std::endl;
 		if(st[0] != '-'){
 			std::vector<char> v;
 			v.clear();
 			for(std::string::iterator it_str = st.begin(); it_str != st.end(); it_str++){
-				// std::cout << *it_str << ' ';
+				std::cout << *it_str << " - " << int(*it_str) << std::endl;
 				v.push_back(*it_str);
 			}
 			volume *= v.size();
@@ -79,10 +91,8 @@ int main(int argc, char const *argv[])
 
 	auto finish = std::chrono::system_clock::now();
 	std::chrono::duration<double> elapsed_seconds = finish-start;
-    std::time_t end_time = std::chrono::system_clock::to_time_t(finish);
  
     std::cout << std::endl << std::endl 
-    		  << "finished computation at " << std::ctime(&end_time)
               << "elapsed time: " << elapsed_seconds.count() << "s"
               << std::endl;
 
