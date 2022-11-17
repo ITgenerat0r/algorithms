@@ -27,16 +27,6 @@ void chain(std::string bit, const auto& it, const auto& end, std::ofstream& out)
 }
 
 
-void gotoxy(int x, int y)
-{
-    COORD position;
-    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    position.X = x;
-    position.Y = y;
-    SetConsoleCursorPosition(hConsole, position);
-}
-
-
 int main(int argc, char const *argv[])
 {
 	setlocale(LC_ALL, "Russian");
@@ -62,9 +52,28 @@ int main(int argc, char const *argv[])
 		} else {
 			if(st == "-add"){
 				rewrite_file = false;
+			} else if (st == "-d" && i+1 < argc){
+				int p = std::stoi(argv[++i]) - 1;
+				// std::cout << "p = " << p << std::endl;
+				if(data.size() > p && p >= 0){
+					// std::cout << "PUSH\r\n";
+					data.push_back(data[p]);
+					volume *= data[p].size();
+				}
+			} else if (st == "-o"){
+				if(++i < argc){
+					output_file_name = argv[i];
+				}
+			} else if (st == "-help"){
+				std::cout << "-add, don't rewrite file for saving"
+						  << "-d [number], use alphabet from other position"
+						  << "-o [file name], rename output file"
+						  << "-help" << std::endl;
+				return 0;
 			}
 		}
 	}
+
 	// std::cout << std::endl;
 	// data.push_back({'a', 'b', 'c'});
 	// data.push_back({'x', 'y', 'z'});
@@ -93,6 +102,7 @@ int main(int argc, char const *argv[])
 	std::chrono::duration<double> elapsed_seconds = finish-start;
  
     std::cout << std::endl << std::endl 
+    		  << "Generated " << volume << " words." << std::endl
               << "elapsed time: " << elapsed_seconds.count() << "s"
               << std::endl;
 
