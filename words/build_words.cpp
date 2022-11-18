@@ -6,22 +6,26 @@
 #include <windows.h>
 #include <locale>
 
+#include "percent_windows.cpp"
+
 std::string output_file_name = "words";
 
-void chain(std::string bit, const auto& it, const auto& end, std::ofstream& out){
+void chain(std::string bit, const auto& it, const auto& end, std::ofstream& out, Percent p){
 	// if(it == end){
 	// 	return;
 	// }
 	std::vector<char>& subdata = *it;
 	if(it + 1 != end){
 		for(std::vector<char>::iterator i = subdata.begin(); i != subdata.end(); i++){
-			chain(bit + *i, it + 1, end, out);
+			chain(bit + *i, it + 1, end, out, p);
 			// std::cout << bit << *i << std::endl;
 		}
 	} else {
 		for(std::vector<char>::iterator i = subdata.begin(); i != subdata.end(); i++){
 			out << bit + *i << std::endl;
+			p.clear_current_line();
 			std::cout << bit << *i << std::endl;
+			p.increase();
 		}
 	}
 }
@@ -30,6 +34,7 @@ void chain(std::string bit, const auto& it, const auto& end, std::ofstream& out)
 int main(int argc, char const *argv[])
 {
 	setlocale(LC_ALL, "Russian");
+
 	auto start = std::chrono::system_clock::now();
 	bool rewrite_file = true;
 	std::vector<std::vector<char>> data;
@@ -85,6 +90,8 @@ int main(int argc, char const *argv[])
 
 	std::cout << "Generating " << volume << " words..." << std::endl;
 
+	Percent bar(0, volume);
+
 	std::string word = "";
 	if(begin(data) != end(data)){
 		std::ofstream fo;
@@ -94,7 +101,7 @@ int main(int argc, char const *argv[])
 			fo.open(output_file_name, std::ios::app);
 			fo << std::endl;
 		}
-		chain(word, begin(data), end(data), fo);
+		chain(word, begin(data), end(data), fo, bar);
 		fo.close();
 	}
 
