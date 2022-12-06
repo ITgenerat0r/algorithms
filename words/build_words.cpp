@@ -151,7 +151,7 @@ int main(int argc, char const *argv[])
 
 
 	    // запись результата в файл
-	    std::cout << "Write data in file!" << std::endl;
+	    std::cout << "Writing data in file..." << std::endl;
 	    std::ofstream fo;
 	    if(rewrite_file){
 			fo.open(output_file_name);
