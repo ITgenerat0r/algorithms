@@ -75,12 +75,12 @@ int main(int argc, char const *argv[])
 					data.push_back(data[p]);
 					volume *= data[p].size();
 				}
-			} else if (st == "-permutation" && i+1 < argc){
+			} else if (st == "-permutations" && i+1 < argc){
 				alphabet = argv[++i];
 			} else if (st == "-min" && i+1 < argc){
 				min_len = std::stoi(argv[++i]);
 			} else if (st == "-max" && i+1 < argc){
-				max_len = std::stoi(argv[++i] - 1);
+				max_len = std::stoi(argv[++i]) + 1;
 			} else if (st == "-mask" && i+1 < argc){
 				mask = argv[++i];
 			} else if (st == "-o"){
