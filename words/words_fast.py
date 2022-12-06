@@ -171,15 +171,16 @@ for ii in ttt:
 		i = ""
 		for j in ii:
 			i += j
-		# print("-", i)
-			if dct.check(i):
-				print(Fore.YELLOW)
-				print_before_percent(i, len_scrl, step, percent_is_printed)
-				f.write(i + '\n')
-			else:
-				print(Fore.BLUE)
-				print_before_percent(i, len_scrl, step, percent_is_printed)
-				# f.write(i + '\n')
+			# print("-", i)
+			if len(i) > 3:
+				if dct.check(i):
+					print(Fore.YELLOW)
+					print_before_percent(i, len_scrl, step, percent_is_printed)
+					f.write(i + '\n')
+				else:
+					print(Fore.BLUE)
+					print_before_percent(i, len_scrl, step, percent_is_printed)
+					# f.write(i + '\n')
 
 f.close()
 
