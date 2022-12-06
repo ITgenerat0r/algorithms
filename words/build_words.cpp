@@ -149,7 +149,9 @@ int main(int argc, char const *argv[])
 	        // res.insert(alphabet);
 	    } while(std::next_permutation(alphabet.begin(), alphabet.end()));
 
+
 	    // запись результата в файл
+	    std::cout << "Write data in file!" << std::endl;
 	    std::ofstream fo;
 	    if(rewrite_file){
 			fo.open(output_file_name);
@@ -158,7 +160,7 @@ int main(int argc, char const *argv[])
 			fo << std::endl;
 		}
 	    for(const auto& it : res){
-	    	std::cout << it << std::endl;
+	    	// std::cout << it << std::endl;
 	    	fo << it << std::endl;
 	    }
 	    fo.close();
