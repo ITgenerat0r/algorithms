@@ -5,8 +5,12 @@ colorama.init()
 import enchant
 
 
-
+hide = False
 file_name = "words"
+
+for i in argv:
+	if(i == "-hide"):
+		hide = True
 
 f = open(file_name, 'r')
 data = f.read().split()
@@ -51,9 +55,10 @@ for i in data:
 	if(dct.check(i)):
 		res.append(i)
 		print(Fore.YELLOW)
-	else:
+		print(i)
+	elif not hide:
 		print(Fore.BLUE)
-	print(i)
+		print(i)
 
 
 print()
