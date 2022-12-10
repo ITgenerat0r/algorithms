@@ -50,6 +50,7 @@ if ru and en:
 for i in data:
 	print()
 	print(i)
+	print(dct.check(i))
 	res = dct.suggest(i)
 	for j in res:
 		print("   ", j)
