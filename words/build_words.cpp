@@ -88,14 +88,14 @@ int main(int argc, char const *argv[])
 					output_file_name = argv[i];
 				}
 			} else if (st == "-help"){
-				std::cout << "-add, don't rewrite file for saving"
-						  << "-d [number], use alphabet from other position"
-						  << "-o [file name], rename output file"
-						  << "permutation [alphabet]"
-						  << "-min [number], minimum lenght for output words"
-						  << "-max [number], maximum lenght for output words"
-						  << "-mask [mask], not developed"
-						  << "-help" << std::endl;
+				std::cout << " -add, don't rewrite file for saving" << std::endl
+						  << " -d [number], use alphabet from other position" << std::endl
+						  << " -o [file name], rename output file" << std::endl
+						  << " -permutations [alphabet]" << std::endl
+						  << " -min [number], minimum lenght for output words" << std::endl
+						  << " -max [number], maximum lenght for output words" << std::endl
+						  << " -mask [mask], not developed" << std::endl
+						  << " -help" << std::endl;
 				return 0;
 			}
 		}
@@ -135,8 +135,8 @@ int main(int argc, char const *argv[])
 		std::set<std::string> res;
 		res.clear();
 		int len_alphabet = alphabet.size();
-		if(max_len == 0 || max_len > alphabet.size()){
-			max_len = alphabet.size();
+		if(max_len == 0 || max_len > alphabet.size() + 1){
+			max_len = alphabet.size() + 1;
 		}
 
 		std::sort(alphabet.begin(), alphabet.end());

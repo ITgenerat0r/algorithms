@@ -3,18 +3,34 @@ from colorama import Fore, Back, Style
 import colorama
 colorama.init()
 import enchant
+import datetime
 
+version = "v2.3"
+
+def print_time(ps="", oc=True):
+	now = datetime.datetime.now()
+	if oc:
+		print(now.strftime("%H:%M:%S"), ps)
+	else:
+		return now.strftime("%H:%M:%S")+" "+ps
+
+start = datetime.datetime.now()
 
 hide = False
-file_name = "words"
+file_name_in = "words"
+file_name_out = "words.log"
+
+print("Version", version)
+print_time("Started.")
 
 for i in argv:
 	if(i == "-hide"):
 		hide = True
 
-f = open(file_name, 'r')
+f = open(file_name_in, 'r')
 data = f.read().split()
 f.close()
+
 
 if len(data) == 0:
 	exit()
@@ -51,15 +67,20 @@ if ru and en:
 
 res = []
 
+f = open(file_name_out, 'w')
+finded_words = 0
 for i in data:
 	if(dct.check(i)):
 		res.append(i)
 		print(Fore.YELLOW)
 		print(i)
+		f.write(i)
+		finded_words += 1
 	elif not hide:
 		print(Fore.BLUE)
 		print(i)
-
+f.close()
+print_time("Checked!")
 
 print()
 print(Fore.YELLOW)
@@ -67,5 +88,9 @@ print(" Output:")
 for i in res:
 	print(i)
 
+print("Finded", finded_words, "words.")
+print_time("Finished!")
 
-
+final = datetime.datetime.now()
+elapsed = final - start
+print("Elapsed time: ", elapsed)
