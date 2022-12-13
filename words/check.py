@@ -75,6 +75,7 @@ for i in data:
 		print(Fore.YELLOW)
 		print(i)
 		f.write(i)
+		f.write("\n")
 		finded_words += 1
 	elif not hide:
 		print(Fore.BLUE)
